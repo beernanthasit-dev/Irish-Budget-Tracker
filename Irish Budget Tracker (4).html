@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="en" data-color-scheme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Irish Budget Tracker</title>
+  <style>
+    :root {
+      --color-white: rgba(255, 255, 255, 1);
+      --color-black: rgba(0, 0, 0, 1);
+      --color-cream-50: rgba(252, 252, 249, 1);
+      --color-cream-100: rgba(255, 255, 253, 1);
+      --color-gray-200: rgba(245, 245, 245, 1);
+      --color-gray-300: rgba(167, 169, 169, 1);
+      --color-gray-400: rgba(119, 124, 124, 1);
+      --color-slate-500: rgba(98, 108, 113, 1);
+      --color-brown-600: rgba(94, 82, 64, 1);
+      --color-charcoal-700: rgba(31, 33, 33, 1);
+      --color-charcoal-800: rgba(38, 40, 40, 1);
+      --color-slate-900: rgba(19, 52, 59, 1);
+      --color-teal-300: rgba(50, 184, 198, 1);
+      --color-teal-400: rgba(45, 166, 178, 1);
+      --color-teal-500: rgba(33, 128, 141, 1);
+      --color-teal-600: rgba(29, 116, 128, 1);
+      --color-teal-700: rgba(26, 104, 115, 1);
+      --color-teal-800: rgba(41, 150, 161, 1);
+      --color-red-400: rgba(255, 84, 89, 1);
+      --color-red-500: rgba(192, 21, 47, 1);
+      --color-orange-400: rgba(230, 129, 97, 1);
+      --color-orange-500: rgba(168, 75, 47, 1);
+
+      --color-brown-600-rgb: 94, 82, 64;
+      --color-teal-500-rgb: 33, 128, 141;
+      --color-slate-900-rgb: 19, 52, 59;
+      --color-slate-500-rgb: 98, 108, 113;
+      --color-red-500-rgb: 192, 21, 47;
+      --color-red-400-rgb: 255, 84, 89;
+      --color-orange-500-rgb: 168, 75, 47;
+      --color-orange-400-rgb: 230, 129, 97;
+
+      --color-bg-1: rgba(59, 130, 246, 0.08);
+      --color-bg-2: rgba(245, 158, 11, 0.08);
+      --color-bg-3: rgba(34, 197, 94, 0.08);
+      --color-bg-4: rgba(239, 68, 68, 0.08);
+      --color-bg-5: rgba(147, 51, 234, 0.08);
+      --color-bg-6: rgba(249, 115, 22, 0.08);
+      --color-bg-7: rgba(236, 72, 153, 0.08);
+      --color-bg-8: rgba(6, 182, 212, 0.08);
+
+      --color-background: var(--color-cream-50);
+      --color-surface: var(--color-cream-100);
+      --color-text: var(--color-slate-900);
+      --color-text-secondary: var(--color-slate-500);
+      --color-primary: var(--color-teal-500);
+      --color-primary-hover: var(--color-teal-600);
+      --color-primary-active: var(--color-teal-700);
+      --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+      --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-btn-primary-text: var(--color-cream-50);
+      --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-error: var(--color-red-500);
+      --color-success: var(--color-teal-500);
+      --color-warning: var(--color-orange-500);
+      --color-info: var(--color-slate-500);
+      --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+      --color-select-caret: rgba(var(--color-slate-900-rgb), 0.8);
+
+      --color-success-rgb: 33, 128, 141;
+      --color-error-rgb: 192, 21, 47;
+      --color-warning-rgb: 168, 75, 47;
+      --color-info-rgb: 98, 108, 113;
+
+      --font-family-base: "FKGroteskNeue", "Geist", "Inter", -apple-system,
+        BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-family-mono: "Berkeley Mono", ui-monospace, SFMono-Regular, Menlo,
+        Monaco, Consolas, monospace;
+      --font-size-xs: 11px;
+      --font-size-sm: 12px;
+      --font-size-base: 14px;
+      --font-size-md: 14px;
+      --font-size-lg: 16px;
+      --font-size-xl: 18px;
+      --font-size-2xl: 20px;
+      --font-size-3xl: 24px;
+      --font-size-4xl: 30px;
+      --font-weight-normal: 400;
+      --font-weight-medium: 500;
+      --font-weight-semibold: 550;
+      --font-weight-bold: 600;
+      --line-height-tight: 1.2;
+      --line-height-normal: 1.5;
+      --letter-spacing-tight: -0.01em;
+
+      --space-0: 0;
+      --space-1: 1px;
+      --space-2: 2px;
+      --space-4: 4px;
+      --space-6: 6px;
+      --space-8: 8px;
+      --space-10: 10px;
+      --space-12: 12px;
+      --space-16: 16px;
+      --space-20: 20px;
+      --space-24: 24px;
+      --space-32: 32px;
+
+      --radius-sm: 6px;
+      --radius-base: 8px;
+      --radius-md: 10px;
+      --radius-lg: 12px;
+      --radius-full: 9999px;
+
+      --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.04),
+        0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.04),
+        0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.15),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.03);
+
+      --duration-fast: 150ms;
+      --duration-normal: 250ms;
+      --ease-standard: cubic-bezier(0.16, 1, 0.3, 1);
+
+      --container-sm: 640px;
+      --container-md: 768px;
+      --container-lg: 1024px;
+      --container-xl: 1280px;
+
+      --focus-ring: 0 0 0 3px var(--color-focus-ring);
+      --focus-outline: 2px solid var(--color-primary);
+      --status-bg-opacity: 0.15;
+      --status-border-opacity: 0.25;
+      --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --color-gray-400-rgb: 119, 124, 124;
+        --color-teal-300-rgb: 50, 184, 198;
+        --color-gray-300-rgb: 167, 169, 169;
+        --color-gray-200-rgb: 245, 245, 245;
+
+        --color-bg-1: rgba(29, 78, 216, 0.15);
+        --color-bg-2: rgba(180, 83, 9, 0.15);
+        --color-bg-3: rgba(21, 128, 61, 0.15);
+        --color-bg-4: rgba(185, 28, 28, 0.15);
+        --color-bg-5: rgba(107, 33, 168, 0.15);
+        --color-bg-6: rgba(194, 65, 12, 0.15);
+        --color-bg-7: rgba(190, 24, 93, 0.15);
+        --color-bg-8: rgba(8, 145, 178, 0.15);
+
+        --color-background: var(--color-charcoal-700);
+        --color-surface: var(--color-charcoal-800);
+        --color-text: var(--color-gray-200);
+        --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+        --color-primary: var(--color-teal-300);
+        --color-primary-hover: var(--color-teal-400);
+        --color-primary-active: var(--color-teal-800);
+        --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+        --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+        --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+        --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+        --color-error: var(--color-red-400);
+        --color-success: var(--color-teal-300);
+        --color-warning: var(--color-orange-400);
+        --color-info: var(--color-gray-300);
+        --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+        --color-btn-primary-text: var(--color-slate-900);
+        --color-card-border: rgba(var(--color-gray-400-rgb), 0.2);
+        --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+        --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+        --button-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+        --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+        --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+        --focus-ring: 0 0 0 3px var(--color-focus-ring);
+        --focus-outline: 2px solid var(--color-primary);
+        --status-bg-opacity: 0.15;
+        --status-border-opacity: 0.25;
+        --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+        --color-success-rgb: var(--color-teal-300-rgb);
+        --color-error-rgb: var(--color-red-400-rgb);
+        --color-warning-rgb: var(--color-orange-400-rgb);
+        --color-info-rgb: var(--color-gray-300-rgb);
+      }
+    }
+
+    [data-color-scheme="dark"] {
+      --color-gray-400-rgb: 119, 124, 124;
+      --color-teal-300-rgb: 50, 184, 198;
+      --color-gray-300-rgb: 167, 169, 169;
+      --color-gray-200-rgb: 245, 245, 245;
+
+      --color-bg-1: rgba(29, 78, 216, 0.15);
+      --color-bg-2: rgba(180, 83, 9, 0.15);
+      --color-bg-3: rgba(21, 128, 61, 0.15);
+      --color-bg-4: rgba(185, 28, 28, 0.15);
+      --color-bg-5: rgba(107, 33, 168, 0.15);
+      --color-bg-6: rgba(194, 65, 12, 0.15);
+      --color-bg-7: rgba(190, 24, 93, 0.15);
+      --color-bg-8: rgba(8, 145, 178, 0.15);
+
+      --color-background: var(--color-charcoal-700);
+      --color-surface: var(--color-charcoal-800);
+      --color-text: var(--color-gray-200);
+      --color-text-secondary: rgba(var(--color-gray-300-rgb), 0.7);
+      --color-primary: var(--color-teal-300);
+      --color-primary-hover: var(--color-teal-400);
+      --color-primary-active: var(--color-teal-800);
+      --color-secondary: rgba(var(--color-gray-400-rgb), 0.15);
+      --color-secondary-hover: rgba(var(--color-gray-400-rgb), 0.25);
+      --color-secondary-active: rgba(var(--color-gray-400-rgb), 0.3);
+      --color-border: rgba(var(--color-gray-400-rgb), 0.3);
+      --color-error: var(--color-red-400);
+      --color-success: var(--color-teal-300);
+      --color-warning: var(--color-orange-400);
+      --color-info: var(--color-gray-300);
+      --color-focus-ring: rgba(var(--color-teal-300-rgb), 0.4);
+      --color-btn-primary-text: var(--color-slate-900);
+      --color-card-border: rgba(var(--color-gray-400-rgb), 0.15);
+      --color-card-border-inner: rgba(var(--color-gray-400-rgb), 0.15);
+      --shadow-inset-sm: inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+      --color-border-secondary: rgba(var(--color-gray-400-rgb), 0.2);
+      --color-select-caret: rgba(var(--color-gray-200-rgb), 0.8);
+
+      --focus-ring: 0 0 0 3px var(--color-focus-ring);
+      --focus-outline: 2px solid var(--color-primary);
+      --status-bg-opacity: 0.15;
+      --status-border-opacity: 0.25;
+      --select-caret-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23134252' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      --select-caret-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23f5f5f5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+
+      --color-success-rgb: var(--color-teal-300-rgb);
+      --color-error-rgb: var(--color-red-400-rgb);
+      --color-warning-rgb: var(--color-orange-400-rgb);
+      --color-info-rgb: var(--color-gray-300-rgb);
+    }
+
+    [data-color-scheme="light"] {
+      --color-brown-600-rgb: 94, 82, 64;
+      --color-teal-500-rgb: 33, 128, 141;
+      --color-slate-900-rgb: 19, 52, 59;
+
+      --color-background: var(--color-cream-50);
+      --color-surface: var(--color-cream-100);
+      --color-text: var(--color-slate-900);
+      --color-text-secondary: var(--color-slate-500);
+      --color-primary: var(--color-teal-500);
+      --color-primary-hover: var(--color-teal-600);
+      --color-primary-active: var(--color-teal-700);
+      --color-secondary: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-secondary-hover: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-secondary-active: rgba(var(--color-brown-600-rgb), 0.25);
+      --color-border: rgba(var(--color-brown-600-rgb), 0.2);
+      --color-btn-primary-text: var(--color-cream-50);
+      --color-card-border: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-card-border-inner: rgba(var(--color-brown-600-rgb), 0.12);
+      --color-error: var(--color-red-500);
+      --color-success: var(--color-teal-500);
+      --color-warning: var(--color-orange-500);
+      --color-info: var(--color-slate-500);
+      --color-focus-ring: rgba(var(--color-teal-500-rgb), 0.4);
+
+      --color-success-rgb: var(--color-teal-500-rgb);
+      --color-error-rgb: var(--color-red-500-rgb);
+      --color-warning-rgb: var(--color-orange-500-rgb);
+      --color-info-rgb: var(--color-slate-500-rgb);
+    }
+
+    html {
+      font-size: var(--font-size-base);
+      font-family: var(--font-family-base);
+      line-height: var(--line-height-normal);
+      color: var(--color-text);
+      background-color: var(--color-background);
+      -webkit-font-smoothing: antialiased;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--color-background);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: inherit;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      margin: 0;
+      font-weight: var(--font-weight-semibold);
+      line-height: var(--line-height-tight);
+      color: var(--color-text);
+      letter-spacing: var(--letter-spacing-tight);
+    }
+
+    h1 {
+      font-size: var(--font-size-3xl);
+    }
+
+    h2 {
+      font-size: var(--font-size-2xl);
+    }
+
+    h3 {
+      font-size: var(--font-size-xl);
+    }
+
+    p {
+      margin: 0 0 var(--space-12) 0;
+    }
+
+    .container {
+      width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: var(--space-12);
+      padding-left: var(--space-12);
+      max-width: 960px;
+    }
+
+    @media (min-width: 640px) {
+      .container {
+        padding-right: var(--space-16);
+        padding-left: var(--space-16);
+      }
+    }
+
+    .app-shell {
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: var(--space-16) 0 var(--space-24);
+    }
+
+    .card {
+      background-color: var(--color-surface);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--color-card-border);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card__header {
+      padding: var(--space-16);
+      border-bottom: 1px solid var(--color-card-border-inner);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+    }
+
+    .card__body {
+      padding: var(--space-16);
+    }
+
+    .card__section {
+      margin-bottom: var(--space-16);
+    }
+
+    .badge {
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      background-color: var(--color-bg-8);
+      color: var(--color-primary);
+      font-weight: var(--font-weight-medium);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-8) var(--space-16);
+      border-radius: var(--radius-base);
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.5;
+      cursor: pointer;
+      transition: all var(--duration-normal) var(--ease-standard);
+      border: none;
+      text-decoration: none;
+      position: relative;
+      white-space: nowrap;
+    }
+
+    .btn--primary {
+      background: var(--color-primary);
+      color: var(--color-btn-primary-text);
+    }
+
+    .btn--primary:hover {
+      background: var(--color-primary-hover);
+    }
+
+    .btn--outline {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    .btn--outline:hover {
+      background: var(--color-secondary);
+    }
+
+    .btn--sm {
+      padding: var(--space-4) var(--space-12);
+      font-size: var(--font-size-xs);
+      border-radius: var(--radius-sm);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-12);
+    }
+
+    @media (min-width: 700px) {
+      .form-row--2 {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .form-group {
+      margin-bottom: var(--space-8);
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .form-control {
+      display: block;
+      width: 100%;
+      padding: var(--space-8) var(--space-10);
+      font-size: var(--font-size-sm);
+      line-height: 1.5;
+      color: var(--color-text);
+      background-color: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-base);
+      transition: border-color var(--duration-fast) var(--ease-standard),
+        box-shadow var(--duration-fast) var(--ease-standard);
+      -webkit-appearance: none;
+      appearance: none;
+    }
+
+    .form-control:focus {
+      border-color: var(--color-primary);
+      outline: var(--focus-outline);
+    }
+
+    .input-prefix {
+      display: inline-flex;
+      align-items: center;
+      padding: 0 var(--space-6);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-sm);
+    }
+
+    .input-with-prefix {
+      display: flex;
+      align-items: center;
+      border-radius: var(--radius-base);
+      border: 1px solid var(--color-border);
+      background-color: var(--color-surface);
+      overflow: hidden;
+    }
+
+    .input-with-prefix input {
+      border: none;
+      border-radius: 0;
+      padding-left: var(--space-6);
+    }
+
+    .input-with-prefix input:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .input-with-prefix:focus-within {
+      border-color: var(--color-primary);
+      box-shadow: var(--focus-ring);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      font-size: var(--font-size-xs);
+      background-color: var(--color-bg-2);
+      color: var(--color-text-secondary);
+      gap: var(--space-4);
+    }
+
+    .pill strong {
+      color: var(--color-text);
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      padding: var(--space-6) var(--space-12);
+      border-radius: var(--radius-full);
+      font-weight: var(--font-weight-medium);
+      font-size: var(--font-size-xs);
+      gap: var(--space-4);
+    }
+
+    .status--success {
+      background-color: rgba(var(--color-success-rgb), 0.15);
+      color: var(--color-success);
+      border: 1px solid rgba(var(--color-success-rgb), 0.25);
+    }
+
+    .status--warning {
+      background-color: rgba(var(--color-warning-rgb), 0.15);
+      color: var(--color-warning);
+      border: 1px solid rgba(var(--color-warning-rgb), 0.25);
+    }
+
+    .status--error {
+      background-color: rgba(var(--color-error-rgb), 0.15);
+      color: var(--color-error);
+      border: 1px solid rgba(var(--color-error-rgb), 0.25);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background-color: currentColor;
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-12);
+    }
+
+    @media (min-width: 700px) {
+      .summary-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    .summary-item {
+      padding: var(--space-10);
+      border-radius: var(--radius-md);
+      background-color: var(--color-bg-1);
+      border: 1px solid rgba(var(--color-brown-600-rgb), 0.06);
+    }
+
+    .summary-label {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+
+    .summary-value {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .summary-sub {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+      margin-top: var(--space-2);
+    }
+
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-16);
+      margin-top: var(--space-8);
+    }
+
+    @media (min-width: 800px) {
+      .charts-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .chart-card {
+      padding: var(--space-12);
+      border-radius: var(--radius-md);
+      background-color: var(--color-bg-5);
+      border: 1px solid rgba(var(--color-brown-600-rgb), 0.06);
+    }
+
+    .chart-title {
+      font-size: var(--font-size-sm);
+      margin-bottom: var(--space-8);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--color-text);
+    }
+
+    canvas {
+      width: 100%;
+      height: 220px;
+      max-height: 260px;
+    }
+
+    .slider-group {
+      margin-bottom: var(--space-8);
+    }
+
+    .slider-label-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: var(--space-2);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .slider-label-row strong {
+      color: var(--color-text);
+    }
+
+    input[type="range"] {
+      width: 100%;
+      -webkit-appearance: none;
+      appearance: none;
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(var(--color-brown-600-rgb), 0.2);
+      outline: none;
+    }
+
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      cursor: pointer;
+      border: 2px solid var(--color-surface);
+      box-shadow: 0 0 0 2px rgba(var(--color-teal-500-rgb), 0.35);
+    }
+
+    input[type="range"]::-moz-range-thumb {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      cursor: pointer;
+      border: 2px solid var(--color-surface);
+      box-shadow: 0 0 0 2px rgba(var(--color-teal-500-rgb), 0.35);
+    }
+
+    .login-card {
+      max-width: 420px;
+      margin: 0 auto var(--space-16);
+      padding: var(--space-16);
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--color-card-border);
+      background-color: var(--color-bg-3);
+    }
+
+    .login-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-8);
+      gap: var(--space-8);
+    }
+
+    .login-title {
+      font-size: var(--font-size-md);
+      font-weight: var(--font-weight-semibold);
+    }
+
+    .login-sub {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .login-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: var(--space-2);
+    }
+
+    .login-tag {
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+    }
+
+    .toggle {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      border-radius: 999px;
+      background-color: rgba(var(--color-brown-600-rgb), 0.3);
+      cursor: pointer;
+      transition: background-color var(--duration-fast) var(--ease-standard);
+      flex-shrink: 0;
+    }
+
+    .toggle-thumb {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: var(--color-surface);
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--duration-fast) var(--ease-standard);
+    }
+
+    .toggle--on {
+      background-color: var(--color-primary);
+    }
+
+    .toggle--on .toggle-thumb {
+      transform: translateX(20px);
+    }
+
+    .flex-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-8);
+    }
+
+    .flex-row-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-8);
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .text-muted {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-xs);
+    }
+
+    .export-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-8);
+      margin-top: var(--space-8);
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-4);
+      padding: var(--space-4) var(--space-8);
+      border-radius: var(--radius-full);
+      background-color: var(--color-bg-6);
+      font-size: var(--font-size-xs);
+      color: var(--color-text-secondary);
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
+    }
+
+    @font-face {
+      font-family: 'FKGroteskNeue';
+      src: url('https://r2cdn.perplexity.ai/fonts/FKGroteskNeue.woff2')
+        format('woff2');
+    }
+  </style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="container">
+    <div class="card" id="app-card">
+      <div class="card__header">
+        <div>
+          <h1>Irish Budget Tracker</h1>
+          <p class="text-muted">
+            Weekly / monthly planner for income, welfare and bills (Cork, Ireland).
+          </p>
+        </div>
+        <div class="flex-row">
+          <span class="badge">€ • Budget dashboard</span>
+          <button class="btn btn--outline btn--sm" id="theme-toggle" type="button">
+            Toggle theme
+          </button>
+        </div>
+      </div>
+
+      <div class="card__body">
+        <!-- Simple login -->
+        <section class="card__section">
+          <div class="login-card" id="login-card">
+            <div class="login-header">
+              <div>
+                <div class="login-title">
+                  Simple login (local only)
+                </div>
+                <div class="login-sub">
+                  Just a nickname to see your dashboard.
+                  <br />
+                  <span class="text-muted">
+                    ไม่มีการเก็บข้อมูลบนเซิร์ฟเวอร์ (local only)
+                  </span>
+                </div>
+              </div>
+              <div class="login-right">
+                <span class="login-tag">Status</span>
+                <span class="status status--warning" id="login-status">
+                  <span class="status-dot"></span>
+                  Guest mode
+                </span>
+              </div>
+            </div>
+
+            <form id="login-form">
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="login-name">
+                    Name / nickname
+                    <span>ชื่อเล่น</span>
+                  </label>
+                  <input
+                    id="login-name"
+                    type="text"
+                    class="form-control"
+                    placeholder="e.g. Cork saver"
+                    autocomplete="off"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="login-pin">
+                    4‑digit PIN (optional)
+                    <span>พิน 4 หลัก (ไม่บังคับ)</span>
+                  </label>
+                  <input
+                    id="login-pin"
+                    type="password"
+                    inputmode="numeric"
+                    maxlength="4"
+                    class="form-control"
+                    placeholder="****"
+                  />
+                </div>
+              </div>
+              <div class="flex-row-wrap" style="margin-top: var(--space-8);">
+                <button class="btn btn--primary btn--sm" type="submit">
+                  Enter dashboard
+                </button>
+                <span class="text-muted">
+                  Tip: you can leave PIN empty if you want.
+                  <span>ปล่อยว่างได้ถ้าไม่อยากใช้พิน</span>
+                </span>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <!-- Revolut import -->
+        <section class="card__section">
+          <div class="flex-row-wrap" style="margin-bottom: var(--space-8);">
+            <h2 style="font-size: var(--font-size-lg);">
+              Revolut import (CSV)
+            </h2>
+            <span class="text-muted">
+              Upload your Revolut CSV export to auto‑fill expenses.
+              <span>อัปโหลด CSV จาก Revolut</span>
+            </span>
+          </div>
+
+          <form id="revolut-form">
+            <div class="form-group">
+              <label class="form-label" for="revolut-file">
+                Choose CSV file
+                <span>เลือกไฟล์ CSV</span>
+              </label>
+              <input
+                id="revolut-file"
+                type="file"
+                accept=".csv"
+                class="form-control"
+              />
+            </div>
+            <div style="display: flex; gap: var(--space-8); flex-wrap: wrap;">
+              <button class="btn btn--primary btn--sm" type="button" id="revolut-upload">
+                Parse and import
+              </button>
+              <button class="btn btn--outline btn--sm" type="button" id="revolut-clear">
+                Clear imported data
+              </button>
+            </div>
+            <div id="revolut-status" class="text-muted" style="margin-top: var(--space-8);"></div>
+          </form>
+        </section>
+
+        <!-- Inputs -->
+        <section class="card__section">
+          <div class="flex-row-wrap" style="margin-bottom: var(--space-8);">
+            <h2 style="font-size: var(--font-size-lg);">
+              Weekly numbers (default €20 food)
+            </h2>
+            <span class="pill">
+              Food (Aldi / Dunnes):
+              <strong>€20/week</strong>
+            </span>
+          </div>
+
+          <form id="budget-form">
+            <div class="form-row form-row--2">
+              <div class="form-group">
+                <label class="form-label" for="income-weekly">
+                  Weekly income (job, side‑gig)
+                  <span>รายได้ต่อสัปดาห์</span>
+                </label>
+                <div class="input-with-prefix">
+                  <span class="input-prefix">€</span>
+                  <input
+                    id="income-weekly"
+                    type="number"
+                    min="0"
+                    step="1"
+                    class="form-control"
+                    value="0"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="welfare-weekly">
+                  Weekly welfare payments
+                  <span>เงินสวัสดิการต่อสัปดาห์</span>
+                </label>
+                <div class="input-with-prefix">
+                  <span class="input-prefix">€</span>
+                  <input
+                    id="welfare-weekly"
+                    type="number"
+                    min="0"
+                    step="1"
+                    class="form-control"
+                    value="0"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="bills-weekly">
+                  Weekly bills (rent, utilities, phone)
+                  <span>บิลต่อสัปดาห์</span>
+                </label>
+                <div class="input-with-prefix">
+                  <span class="input-prefix">€</span>
+                  <input
+                    id="bills-weekly"
+                    type="number"
+                    min="0"
+                    step="1"
+                    class="form-control"
+                    value="0"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="other-weekly">
+                  Other weekly spending (travel, coffee)
+                  <span>ค่าใช้จ่ายอื่น ๆ</span>
+                </label>
+                <div class="input-with-prefix">
+                  <span class="input-prefix">€</span>
+                  <input
+                    id="other-weekly"
+                    type="number"
+                    min="0"
+                    step="1"
+                    class="form-control"
+                    value="0"
+                  />
+                </div>
+              </div>
+            </div>
+          </form>
+        </section>
+
+        <!-- AI style prediction / summary -->
+        <section class="card__section">
+          <div class="flex-row-wrap" style="margin-bottom: var(--space-8);">
+            <h2 style="font-size: var(--font-size-lg);">
+              Savings prediction (simple AI style)
+            </h2>
+            <span class="tag" id="prediction-tag">
+              <span>Hint:</span> increase income or cut bills to boost savings
+            </span>
+          </div>
+
+          <div class="summary-grid" id="summary-grid">
+            <div class="summary-item" id="sum-income">
+              <div class="summary-label">Total weekly income</div>
+              <div class="summary-value" id="sum-income-value">€0</div>
+              <div class="summary-sub">
+                From job + welfare
+              </div>
+            </div>
+            <div class="summary-item" id="sum-expenses">
+              <div class="summary-label">Total weekly expenses</div>
+              <div class="summary-value" id="sum-expenses-value">€20</div>
+              <div class="summary-sub">
+                Food €20 + bills + other
+              </div>
+            </div>
+            <div class="summary-item" id="sum-savings">
+              <div class="summary-label">Predicted weekly savings</div>
+              <div class="summary-value" id="sum-savings-value">€-20</div>
+              <div class="summary-sub" id="sum-savings-sub">
+                Negative means shortfall
+              </div>
+            </div>
+            <div class="summary-item" id="sum-monthly">
+              <div class="summary-label">Predicted monthly savings</div>
+              <div class="summary-value" id="sum-monthly-value">€-80</div>
+              <div class="summary-sub">
+                Approx. 4 weeks per month
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: var(--space-8);">
+            <span class="status status--error" id="ai-status">
+              <span class="status-dot"></span>
+              <span id="ai-message">Shortfall: consider cutting bills or adding income.</span>
+            </span>
+          </div>
+        </section>
+
+        <!-- What-if sliders -->
+        <section class="card__section">
+          <div class="flex-row-wrap" style="margin-bottom: var(--space-8);">
+            <h2 style="font-size: var(--font-size-lg);">
+              What‑if sliders
+            </h2>
+            <span class="text-muted">
+              Adjust and see impact on savings.
+              <span>ปรับสไลด์ดูผลกระทบต่อเงินออม</span>
+            </span>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span><strong>Income change</strong> (‑50% to +50%)</span>
+              <span id="income-slider-label">0%</span>
+            </div>
+            <input
+              type="range"
+              id="income-slider"
+              min="-50"
+              max="50"
+              value="0"
+            />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span><strong>Bills change</strong> (‑50% to +50%)</span>
+              <span id="bills-slider-label">0%</span>
+            </div>
+            <input
+              type="range"
+              id="bills-slider"
+              min="-50"
+              max="50"
+              value="0"
+            />
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-label-row">
+              <span><strong>Food budget</strong> (€10 to €40)</span>
+              <span id="food-slider-label">€20</span>
+            </div>
+            <input
+              type="range"
+              id="food-slider"
+              min="10"
+              max="40"
+              step="1"
+              value="20"
+            />
+          </div>
+        </section>
+
+        <!-- Charts -->
+        <section class="card__section">
+          <div class="flex-row-wrap" style="margin-bottom: var(--space-8);">
+            <h2 style="font-size: var(--font-size-lg);">
+              Charts
+            </h2>
+            <span class="text-muted">
+              Pie for expenses, bar for income vs expenses.
+              <span>กราฟพาย + แท่ง</span>
+            </span>
+          </div>
+
+          <div class="charts-grid">
+            <div class="chart-card">
+              <div class="chart-title">
+                <span>Expenses breakdown (weekly)</span>
+              </div>
+              <canvas id="pie-chart" aria-label="Pie chart of expenses"></canvas>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-title">
+                <span>Income vs expenses vs savings</span>
+              </div>
+              <canvas id="bar-chart" aria-label="Bar chart of income and savings"></canvas>
+            </div>
+          </div>
+
+          <div class="export-row">
+            <div class="tag">
+              CSV export
+              <span>ส่งออก CSV ใช้ใน Excel / Sheets</span>
+            </div>
+            <button class="btn btn--outline btn--sm" id="export-csv" type="button">
+              Download CSV
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const root = document.documentElement;
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const loginForm = document.getElementById('login-form');
+    const loginNameInput = document.getElementById('login-name');
+    const loginPinInput = document.getElementById('login-pin');
+    const loginStatus = document.getElementById('login-status');
+
+    const incomeInput = document.getElementById('income-weekly');
+    const welfareInput = document.getElementById('welfare-weekly');
+    const billsInput = document.getElementById('bills-weekly');
+    const otherInput = document.getElementById('other-weekly');
+
+    const incomeSlider = document.getElementById('income-slider');
+    const billsSlider = document.getElementById('bills-slider');
+    const foodSlider = document.getElementById('food-slider');
+    const incomeSliderLabel = document.getElementById('income-slider-label');
+    const billsSliderLabel = document.getElementById('bills-slider-label');
+    const foodSliderLabel = document.getElementById('food-slider-label');
+
+    const sumIncomeValue = document.getElementById('sum-income-value');
+    const sumExpensesValue = document.getElementById('sum-expenses-value');
+    const sumSavingsValue = document.getElementById('sum-savings-value');
+    const sumSavingsSub = document.getElementById('sum-savings-sub');
+    const sumMonthlyValue = document.getElementById('sum-monthly-value');
+    const predictionTag = document.getElementById('prediction-tag');
+    const aiStatus = document.getElementById('ai-status');
+    const aiMessage = document.getElementById('ai-message');
+    const exportBtn = document.getElementById('export-csv');
+
+    const revolutForm = document.getElementById('revolut-form');
+    const revolutFile = document.getElementById('revolut-file');
+    const revolutUploadBtn = document.getElementById('revolut-upload');
+    const revolutClearBtn = document.getElementById('revolut-clear');
+    const revolutStatus = document.getElementById('revolut-status');
+
+    const pieCanvas = document.getElementById('pie-chart');
+    const barCanvas = document.getElementById('bar-chart');
+
+    function parseValue(input) {
+      const n = parseFloat(input.value);
+      return isNaN(n) ? 0 : n;
+    }
+
+    function formatEuro(value) {
+      const sign = value < 0 ? '-' : '';
+      const abs = Math.abs(value);
+      const rounded = Math.round(abs);
+      return sign + '€' + rounded.toString();
+    }
+
+    let currentData = {
+      baseFood: 20,
+      income: 0,
+      welfare: 0,
+      bills: 0,
+      other: 0,
+      incomeAdj: 0,
+      billsAdj: 0,
+      food: 20,
+      totalIncome: 0,
+      totalExpenses: 0,
+      savings: 0
+    };
+
+    themeToggleBtn.addEventListener('click', () => {
+      const current = root.getAttribute('data-color-scheme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-color-scheme', next);
+    });
+
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = loginNameInput.value.trim();
+      if (!name) {
+        loginStatus.classList.remove('status--success');
+        loginStatus.classList.add('status--error');
+        loginStatus.innerHTML =
+          '<span class="status-dot"></span> Please enter name. กรุณาใส่ชื่อ';
+        return;
+      }
+      loginStatus.classList.remove('status--warning', 'status--error');
+      loginStatus.classList.add('status--success');
+      loginStatus.innerHTML =
+        '<span class="status-dot"></span> Welcome, ' +
+        name +
+        ' (local session only)';
+    });
+
+    function updateSlidersLabels() {
+      incomeSliderLabel.textContent =
+        (incomeSlider.value > 0 ? '+' : '') + incomeSlider.value + '%';
+      billsSliderLabel.textContent =
+        (billsSlider.value > 0 ? '+' : '') + billsSlider.value + '%';
+      foodSliderLabel.textContent = '€' + foodSlider.value;
+    }
+
+    function computeBudget() {
+      const incomeBase = parseValue(incomeInput);
+      const welfare = parseValue(welfareInput);
+      const billsBase = parseValue(billsInput);
+      const other = parseValue(otherInput);
+      const foodBase = parseFloat(foodSlider.value);
+
+      const incomeAdj = parseFloat(incomeSlider.value) / 100;
+      const billsAdj = parseFloat(billsSlider.value) / 100;
+
+      const incomeTotal = (incomeBase + welfare) * (1 + incomeAdj);
+      const billsTotal = billsBase * (1 + billsAdj);
+      const expensesTotal = foodBase + billsTotal + other;
+      const savings = incomeTotal - expensesTotal;
+      const monthlySavings = savings * 4;
+
+      currentData = {
+        baseFood: foodBase,
+        income: incomeBase,
+        welfare: welfare,
+        bills: billsBase,
+        other: other,
+        incomeAdj: incomeAdj,
+        billsAdj: billsAdj,
+        food: foodBase,
+        totalIncome: incomeTotal,
+        totalExpenses: expensesTotal,
+        savings: savings
+      };
+
+      sumIncomeValue.textContent = formatEuro(incomeTotal);
+      sumExpensesValue.textContent = formatEuro(expensesTotal);
+      sumSavingsValue.textContent = formatEuro(savings);
+      sumMonthlyValue.textContent = formatEuro(monthlySavings);
+
+      if (savings > 50) {
+        aiStatus.classList.remove('status--warning', 'status--error');
+        aiStatus.classList.add('status--success');
+        aiMessage.textContent =
+          'Good! You can save this week. ดีมาก สามารถออมเงินได้';
+        predictionTag.textContent =
+          'Nice buffer – maybe move part to savings account.';
+      } else if (savings >= 0) {
+        aiStatus.classList.remove('status--error', 'status--success');
+        aiStatus.classList.add('status--warning');
+        aiMessage.textContent =
+          'Small savings. Try to watch bills & extras. เงินออมน้อย ควบคุมค่าใช้จ่ายเพิ่มนิดหน่อย';
+        predictionTag.textContent =
+          'Tight but possible. Keep food at €20 and check subscriptions.';
+      } else {
+        aiStatus.classList.remove('status--success', 'status--warning');
+        aiStatus.classList.add('status--error');
+        aiMessage.textContent =
+          'Shortfall. Need more income or lower bills. รายได้ไม่พอ ลดค่าใช้จ่ายหรือหารายได้เพิ่ม';
+        predictionTag.textContent =
+          'Priority: reduce bills or talk to social welfare advisor.';
+      }
+
+      drawPieChart();
+      drawBarChart();
+    }
+
+    function drawPieChart() {
+      if (!pieCanvas.getContext) return;
+      const ctx = pieCanvas.getContext('2d');
+      const w = pieCanvas.width = pieCanvas.clientWidth;
+      const h = pieCanvas.height = pieCanvas.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const food = currentData.food;
+      const bills = currentData.bills * (1 + currentData.billsAdj);
+      const other = currentData.other;
+      const total = food + bills + other;
+
+      if (total <= 0) {
+        ctx.fillStyle = 'rgba(0,0,0,0.25)';
+        ctx.font = '12px ' + getComputedStyle(document.body).fontFamily;
+        ctx.textAlign = 'center';
+        ctx.fillText('No expenses yet', w / 2, h / 2);
+        return;
+      }
+
+      const cx = w / 2;
+      const cy = h / 2;
+      const radius = Math.min(w, h) / 2 - 10;
+
+      const segments = [
+        { label: 'Food', value: food, color: 'rgba(33,128,141,0.9)' },
+        { label: 'Bills', value: bills, color: 'rgba(168,75,47,0.9)' },
+        { label: 'Other', value: other, color: 'rgba(98,108,113,0.9)' }
+      ];
+
+      let startAngle = -Math.PI / 2;
+      ctx.lineWidth = 1;
+
+      segments.forEach(seg => {
+        if (seg.value <= 0) return;
+        const sliceAngle = (seg.value / total) * Math.PI * 2;
+        const endAngle = startAngle + sliceAngle;
+
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.arc(cx, cy, radius, startAngle, endAngle);
+        ctx.closePath();
+        ctx.fillStyle = seg.color;
+        ctx.fill();
+
+        ctx.strokeStyle = 'rgba(255,255,255,0.8)';
+        ctx.stroke();
+
+        const midAngle = startAngle + sliceAngle / 2;
+        const labelRadius = radius * 0.65;
+        const lx = cx + Math.cos(midAngle) * labelRadius;
+        const ly = cy + Math.sin(midAngle) * labelRadius;
+
+        ctx.fillStyle = 'white';
+        ctx.font = '11px ' + getComputedStyle(document.body).fontFamily;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(
+          seg.label + ' ' + Math.round((seg.value / total) * 100) + '%',
+          lx,
+          ly
+        );
+
+        startAngle = endAngle;
+      });
+    }
+
+    function drawBarChart() {
+      if (!barCanvas.getContext) return;
+      const ctx = barCanvas.getContext('2d');
+      const w = barCanvas.width = barCanvas.clientWidth;
+      const h = barCanvas.height = barCanvas.clientHeight;
+
+      ctx.clearRect(0, 0, w, h);
+
+      const income = currentData.totalIncome;
+      const expenses = currentData.totalExpenses;
+      const savings = currentData.savings;
+
+      const values = [income, expenses, savings];
+      const maxVal = Math.max(...values.map(v => Math.abs(v)), 10);
+      const padding = 30;
+      const chartHeight = h - padding * 2;
+      const chartWidth = w - padding * 2;
+      const barWidth = chartWidth / 5;
+      const baseY = h - padding;
+
+      const labels = ['Income', 'Expenses', 'Savings'];
+
+      ctx.font = '11px ' + getComputedStyle(document.body).fontFamily;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'top';
+
+      ctx.strokeStyle = 'rgba(0,0,0,0.15)';
+      ctx.beginPath();
+      ctx.moveTo(padding, baseY);
+      ctx.lineTo(w - padding, baseY);
+      ctx.stroke();
+
+      const colors = [
+        'rgba(33,128,141,0.9)',
+        'rgba(168,75,47,0.9)',
+        'rgba(50,184,198,0.9)'
+      ];
+
+      [income, expenses, savings].forEach((val, i) => {
+        const x = padding + (i + 1) * barWidth;
+        const barHeight = (Math.abs(val) / maxVal) * (chartHeight * 0.8);
+        const y = val >= 0 ? baseY - barHeight : baseY;
+
+        ctx.fillStyle = colors[i];
+        ctx.fillRect(x - barWidth / 3, y, barWidth / 1.5, barHeight);
+
+        ctx.fillStyle = '#fff';
+        ctx.textBaseline = 'bottom';
+        const textY = val >= 0 ? y - 2 : y + barHeight - 2;
+        ctx.fillText(formatEuro(val), x, textY);
+
+        ctx.fillStyle = 'rgba(0,0,0,0.7)';
+        ctx.textBaseline = 'top';
+        ctx.fillText(labels[i], x, baseY + 4);
+      });
+    }
+
+    function parseRevolutCSV(csvText) {
+      const lines = csvText.trim().split('\n');
+      if (lines.length < 2) {
+        revolutStatus.innerHTML = '<span class="status status--error"><span class="status-dot"></span> Invalid CSV format. Try again. ไฟล์ CSV ไม่ถูกต้อง</span>';
+        return;
+      }
+
+      const header = lines[0].toLowerCase();
+      let billsTotal = 0;
+      let foodTotal = 0;
+      let otherTotal = 0;
+      let transactionCount = 0;
+
+      for (let i = 1; i < lines.length; i++) {
+        const cells = lines[i].split(',').map(c => c.trim().replace(/^"|"$/g, ''));
+        if (cells.length < 3) continue;
+
+        const description = cells[1].toLowerCase();
+        const amount = parseFloat(cells[2]);
+
+        if (isNaN(amount) || amount === 0) continue;
+
+        const absAmount = Math.abs(amount);
+        transactionCount++;
+
+        if (description.includes('aldi') || description.includes('dunnes') || description.includes('grocery') || description.includes('supermarket')) {
+          foodTotal += absAmount;
+        } else if (description.includes('rent') || description.includes('utility') || description.includes('electric') || description.includes('water') || description.includes('internet') || description.includes('phone')) {
+          billsTotal += absAmount;
+        } else {
+          otherTotal += absAmount;
+        }
+      }
+
+      if (transactionCount === 0) {
+        revolutStatus.innerHTML = '<span class="status status--warning"><span class="status-dot"></span> No transactions found. Check CSV format. ไม่พบธุรกรรม</span>';
+        return;
+      }
+
+      const weeklyFactor = 1;
+      billsInput.value = Math.round(billsTotal * weeklyFactor);
+      otherInput.value = Math.round(otherTotal * weeklyFactor);
+
+      if (foodTotal > 0) {
+        foodSlider.value = Math.min(Math.round(foodTotal * weeklyFactor), 40);
+        foodSliderLabel.textContent = '€' + foodSlider.value;
+      }
+
+      revolutStatus.innerHTML = '<span class="status status--success"><span class="status-dot"></span> Imported ' + transactionCount + ' transactions. Bills: €' + Math.round(billsTotal) + ', Food: €' + Math.round(foodTotal) + ', Other: €' + Math.round(otherTotal) + '</span>';
+
+      computeBudget();
+    }
+
+    function generateCSV() {
+      const rows = [];
+      rows.push(['Field', 'Value']);
+
+      rows.push(['Weekly income (job)', parseValue(incomeInput)]);
+      rows.push(['Weekly welfare', parseValue(welfareInput)]);
+      rows.push(['Weekly bills', parseValue(billsInput)]);
+      rows.push(['Weekly other', parseValue(otherInput)]);
+      rows.push(['Food budget (weekly)', currentData.food]);
+      rows.push(['Income adjustment (%)', currentData.incomeAdj * 100]);
+      rows.push(['Bills adjustment (%)', currentData.billsAdj * 100]);
+      rows.push(['Total weekly income', currentData.totalIncome]);
+      rows.push(['Total weekly expenses', currentData.totalExpenses]);
+      rows.push(['Predicted weekly savings', currentData.savings]);
+      rows.push(['Predicted monthly savings', currentData.savings * 4]);
+
+      const csvContent = rows
+        .map(r =>
+          r
+            .map(v => {
+              const s = String(v);
+              if (s.includes(',') || s.includes('"')) {
+                return '"' + s.replace(/"/g, '""') + '"';
+              }
+              return s;
+            })
+            .join(',')
+        )
+        .join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      const now = new Date();
+      const stamp =
+        now.getFullYear().toString() +
+        ('0' + (now.getMonth() + 1)).slice(-2) +
+        ('0' + now.getDate()).slice(-2);
+      link.href = url;
+      link.download = 'irish_budget_tracker_' + stamp + '.csv';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    [incomeInput, welfareInput, billsInput, otherInput].forEach(el => {
+      el.addEventListener('input', () => {
+        if (el.value === '') el.value = '';
+        computeBudget();
+      });
+    });
+
+    [incomeSlider, billsSlider, foodSlider].forEach(el => {
+      el.addEventListener('input', () => {
+        updateSlidersLabels();
+        computeBudget();
+      });
+    });
+
+    revolutUploadBtn.addEventListener('click', () => {
+      const file = revolutFile.files[0];
+      if (!file) {
+        revolutStatus.innerHTML = '<span class="status status--error"><span class="status-dot"></span> Please select a CSV file first. เลือกไฟล์ CSV ก่อน</span>';
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          parseRevolutCSV(e.target.result);
+        } catch (err) {
+          revolutStatus.innerHTML = '<span class="status status--error"><span class="status-dot"></span> Error reading file: ' + err.message + '</span>';
+        }
+      };
+      reader.readAsText(file);
+    });
+
+    revolutClearBtn.addEventListener('click', () => {
+      billsInput.value = '0';
+      otherInput.value = '0';
+      foodSlider.value = '20';
+      foodSliderLabel.textContent = '€20';
+      revolutFile.value = '';
+      revolutStatus.innerHTML = '<span class="text-muted">Data cleared. Manual entry ready.</span>';
+      computeBudget();
+    });
+
+    exportBtn.addEventListener('click', generateCSV);
+
+    updateSlidersLabels();
+    computeBudget();
+
+    window.addEventListener('resize', () => {
+      computeBudget();
+    });
+  })();
+</script>
+</body>
+</html>
